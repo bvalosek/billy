@@ -1,5 +1,8 @@
 # Billy
 
+[![Build Status](https://travis-ci.org/bvalosek/billy.png?branch=master)](https://travis-ci.org/bvalosek/billy)
+[![NPM version](https://badge.fury.io/js/billy.png)](http://badge.fury.io/js/billy)
+
 A minimal application harness that stays out of your way and out of your code.
 
 ## Installation
