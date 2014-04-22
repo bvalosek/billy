@@ -1,4 +1,4 @@
-# Billy
+# billy
 
 [![Build Status](https://travis-ci.org/bvalosek/billy.png?branch=master)](https://travis-ci.org/bvalosek/billy)
 [![NPM version](https://badge.fury.io/js/billy.png)](http://badge.fury.io/js/billy)
@@ -44,4 +44,4 @@ is done with [Travis CI](https://travis-ci.org/bvalosek/billy).
 ## License
 Copyright 2014 Brandon Valosek
 
-**Billy** is released under the MIT license.
+**billy** is released under the MIT license.
