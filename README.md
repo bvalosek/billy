@@ -8,6 +8,20 @@ A minimal application harness that stays out of your way and out of your code.
 $ npm install billy
 ```
 
+## Usage
+
+```javascript
+var Application = require('billy').Application;
+
+var app = new Application();
+
+app.service(function main() {
+  console.log('Hello, World!');
+});
+
+app.start();
+```
+
 ## Tern Support
 
 The source files are all decorated with [JSDoc3](http://usejsdoc.org/)-style
