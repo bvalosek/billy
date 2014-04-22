@@ -15,8 +15,6 @@ annotations that work great with the [Tern](http://ternjs.net/) code inference
 system. Combined with the Node plugin (see this project's `.tern-project`
 file), you can have intelligent autocomplete for methods in this library.
 
-![tern screenshot](/doc/tern.png)
-
 ## Testing
 
 Testing is done with [Tape](http://github.com/substack/tape) and can be run
