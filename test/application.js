@@ -1,0 +1,154 @@
+var test        = require('tape');
+var Promise     = require('es6-promise').Promise;
+var Application = require('../lib/Application.js');
+
+
+test('config setting', function(t) {
+  t.plan(3);
+  var app = new Application();
+
+  app.config('a', 1);
+  t.strictEqual(app.config('a'), 1);
+
+  app.config('b.c.e', 2);
+  t.strictEqual(app.config('b.c.e'), 2);
+
+  t.deepEqual(app.config('b'), { c: { e: 2 } });
+});
+
+test('config setting shared', function(t) {
+  t.plan(4);
+  var app = new Application();
+
+  app.config('ns.a', 1);
+  t.strictEqual(app.config('ns').a, 1);
+
+  app.config('ns.b', 2);
+  t.strictEqual(app.config('ns.b'), 2);
+
+  app.config('ns.c.d.e.f.g', 3);
+  t.strictEqual(app.config.ns.c.d.e.f.g, 3);
+
+  t.strictEqual(app.config('does.not.exist'), undefined);
+});
+
+test('auto registers', function(t) {
+  t.plan(2);
+
+  var app = new Application();
+  app.start();
+
+  t.strictEqual(app.make('app'), app);
+  t.strictEqual(app.make('config'), app.config);
+});
+
+test('services called in order after start', function(t) {
+  t.plan(2);
+
+  var started = [];
+
+  var app = new Application();
+
+  app.service(function() {
+    started.push('a');
+  });
+
+  app.service(function() {
+    started.push('b');
+  });
+
+  t.deepEqual(started, []);
+
+  app.start();
+  t.deepEqual(started, ['a', 'b']);
+
+});
+
+test('Service as promise waits during starts', function(t) {
+  t.plan(3);
+  var app = new Application();
+
+  var created = [];
+  var started = [];
+
+  app.service(function() {
+    created.push('a');
+    return new Promise(function(resolve, reject) {
+      setTimeout(function() {
+        started.push('a');
+        resolve();
+      }, 300);
+    });
+  });
+
+  app.service(function() {
+    created.push('b');
+    return {
+      start: function() {
+        started.push('b');
+      }
+    };
+  });
+
+  app.start().then(function() {
+    t.pass();
+    t.deepEqual(started, ['a', 'b']);
+  });
+  t.deepEqual(created, ['a', 'b']);
+
+});
+
+test('deps available to services', function(t) {
+  t.plan(3);
+
+  var app = new Application();
+
+  app.service(function(app) {
+    app.register('a', 1);
+  });
+
+  app.service(function(app, a) {
+    t.strictEqual(a, 1);
+    app.register('b', 2);
+  });
+
+  app.service(function(app, a, b) {
+    t.strictEqual(a, 1);
+    t.strictEqual(b, 2);
+  });
+
+  app.start();
+
+});
+
+test('throw in service fails on start sync', function(t) {
+  t.plan(1);
+
+  var app = new Application();
+
+  app.service(function() { throw 123; });
+
+  t.throws(function() { app.start(); }, 123);
+
+});
+
+test('throw in service start async fails the promise', function(t) {
+  t.plan(1);
+
+  var app = new Application();
+
+  app.service(function() {
+    return {
+      start: function() {
+        throw 123;
+      }
+    };
+  });
+
+  app.start().then(null, function(err) {
+    t.strictEqual(err, 123);
+  });
+
+});
+
+

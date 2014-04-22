@@ -1,4 +1,43 @@
 {
   "name": "billy",
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "description": "A minimal application harness that stays out of your way and out of your code.",
+  "author": {
+    "name": "Brandon Valosek",
+    "email": "bvalosek@gmail.com",
+    "url": "http://brandon.is/awesome"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "tape test/*.js"
+  },
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "tape": "~2.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:bvalosek/billy.git"
+  },
+  "testling": {
+    "files": "test/*.js",
+    "browsers": [
+      "ie/6..latest",
+      "chrome/28..canary",
+      "firefox/23..nightly",
+      "safari/5.1..latest",
+      "opera/latest",
+      "opera/next",
+      "iphone/latest",
+      "ipad/latest",
+      "android-browser/latest"
+    ]
+  },
+  "dependencies": {
+    "es6-promise": "^0.1.1",
+    "sack": "^2.0.2"
+  }
 }
