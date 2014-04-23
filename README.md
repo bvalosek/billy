@@ -27,6 +27,15 @@ app.service(function main() {
 app.start();
 ```
 
+## Features
+
+* Dependency injection
+* Generic configuration store
+* Asynchronous service bootup
+* Extremely minimal
+* Service-oriented design
+* Compatible in all browsers and NodeJS
+
 ## Tern Support
 
 The source files are all decorated with [JSDoc3](http://usejsdoc.org/)-style
