@@ -1,5 +1,10 @@
 # Change History
 
+## 1.1.0 (2014-05-20)
+
+* Fixed bug when accessing deep configs that are missing
+* Added `manifest()` method to declaratively setup services and configs
+
 ## 1.0.2 (2014-05-17)
 
 * Updated NPM dependencies.
