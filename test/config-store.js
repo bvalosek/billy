@@ -39,3 +39,8 @@ test('missing', function(t) {
   t.plan(1);
   t.strictEqual(new ConfigStore().getStore()('wot'), undefined);
 });
+
+test('Deep missing returns undef', function(t) {
+  t.plan(1);
+  t.strictEqual(new ConfigStore().get('a.b.c.d.e'), undefined);
+});
