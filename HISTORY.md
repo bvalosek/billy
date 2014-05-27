@@ -1,5 +1,9 @@
 # Change History
 
+## 1.2.0 (2014-05-27)
+
+* Added default implicit sets when getting a config key.
+
 ## 1.1.0 (2014-05-20)
 
 * Fixed bug when accessing deep configs that are missing
