@@ -1,5 +1,11 @@
 # Change History
 
+## 1.3.0 (2014-05-28)
+
+* `manifest()` is deprecated now -- semi pointless
+* Added debugging statements
+* Fixed bug with old IE
+
 ## 1.2.0 (2014-05-27)
 
 * Added default implicit sets when getting a config key.
