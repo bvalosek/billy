@@ -5,7 +5,7 @@
   "author": {
     "name": "Brandon Valosek",
     "email": "bvalosek@gmail.com",
-    "url": "http://brandon.is/awesome"
+    "url": "http://bvalosek.com"
   },
   "directories": {
     "test": "test"
@@ -37,7 +37,9 @@
     ]
   },
   "dependencies": {
+    "debug": "^0.8.1",
     "es6-promise": "^1.0.0",
-    "sack": "^2.0.4"
+    "sack": "^2.0.4",
+    "typedef": "^1.0.4"
   }
 }
