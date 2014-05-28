@@ -1,6 +1,6 @@
 {
   "name": "billy",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A minimal application harness that stays out of your way and out of your code.",
   "author": {
     "name": "Brandon Valosek",
