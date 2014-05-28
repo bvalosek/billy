@@ -48,6 +48,6 @@ test('Deep missing returns undef', function(t) {
 test('default values', function(t) {
   t.plan(2);
   var config = new ConfigStore().getStore();
-  t.strictEqual(config('a.b.c', 1), 1, 'implicit set and return');
-  t.strictEqual(config('a.b.c'), 1, 'actually set');
+  t.strictEqual(config.get('a.b.c', 1), 1, 'implicit set and return');
+  t.strictEqual(config.a.b.c, 1, 'actually set');
 });
