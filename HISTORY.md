@@ -1,5 +1,9 @@
 # Change History
 
+## 1.3.1 (2014-05-29)
+
+* Fixed issue with logging timing
+
 ## 1.3.0 (2014-05-28)
 
 * `manifest()` is deprecated now -- semi pointless
