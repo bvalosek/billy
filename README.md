@@ -16,8 +16,7 @@ $ npm install billy
 ## Usage
 
 ```javascript
-var Application = require('billy').Application;
-
+var Application = require('billy');
 var app = new Application();
 
 app.service(function main() {
@@ -29,12 +28,24 @@ app.start();
 
 ## Features
 
-* Dependency injection
+* Dependency injection / inversion-of-control container
 * Generic configuration store
-* Asynchronous service bootup
+* Asynchronous promise-based service stack
 * Extremely minimal
 * Service-oriented design
 * Compatible in all browsers and NodeJS
+
+## Philosophy
+
+The primary philosophy of Billy is to provide a cohesive and useful set of
+patterns for building an application that doesn't creep its way into your
+business logic and domain code.
+
+It is flexible and generic enough to work great for building server apps,
+browser apps, or even CLI apps.
+
+Billy very much so strives to be the
+[express](https://github.com/visionmedia/express) of application development.
 
 ## Testing
 
