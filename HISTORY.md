@@ -1,5 +1,11 @@
 # Change History
 
+## v1.4.0 (2014-05-31)
+
+* Added `stop()` method to shutdown services in reverse order
+* Removed nasty deferred-style `.started` property
+* Expose the `Application` object directly off of module
+
 ## 1.3.1 (2014-05-29)
 
 * Fixed issue with logging timing
