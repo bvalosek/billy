@@ -35,11 +35,11 @@ test('config setting shared', function(t) {
 test('new and not new instanshe', function(t) {
   t.plan(2);
   var app = new Application();
-  t.ok(app instanceof Application); 
+  t.ok(app instanceof Application);
 
   var billy = Application;
   app = billy();
-  t.ok(app instanceof Application); 
+  t.ok(app instanceof Application);
 });
 
 test('auto registers', function(t) {
@@ -87,7 +87,7 @@ test('Service as promise waits during starts', function(t) {
       setTimeout(function() {
         started.push('a');
         resolve();
-      }, 300);
+      }, 50);
     });
   });
 
@@ -158,6 +158,41 @@ test('throw in service start async fails the promise', function(t) {
   app.start().then(null, function(err) {
     t.strictEqual(err, 123);
   });
+
+});
+
+test('Stopping', function(t) {
+  t.plan(2);
+
+  var app = new Application();
+
+  var stopped = [];
+
+  app.service(function a() {
+    return {
+      stop: function() {
+        stopped.push('a');
+        setTimeout(function() { return Promise.resolve(); }, 50);
+      }
+    };
+  });
+
+  app.service(function b() {
+    return {
+      stop: function() {
+        stopped.push('b');
+        setTimeout(function() { return Promise.resolve(); }, 25);
+      }
+    };
+  });
+
+  app.start();
+  app.stop().then(function() {
+    t.deepEqual(stopped, ['b', 'a']);
+  });
+
+  // async
+  t.deepEqual(stopped, []);
 
 });
 
