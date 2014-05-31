@@ -45,7 +45,8 @@ It is flexible and generic enough to work great for building server apps,
 browser apps, or even CLI apps.
 
 Billy very much so strives to be the
-[express](https://github.com/visionmedia/express) of application development.
+[express](https://github.com/visionmedia/express) of general application
+architecture.
 
 ## Testing
 
