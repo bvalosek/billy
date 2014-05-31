@@ -32,6 +32,16 @@ test('config setting shared', function(t) {
   t.strictEqual(app.config('does.not.exist'), undefined);
 });
 
+test('new and not new instanshe', function(t) {
+  t.plan(2);
+  var app = new Application();
+  t.ok(app instanceof Application); 
+
+  var billy = Application;
+  app = billy();
+  t.ok(app instanceof Application); 
+});
+
 test('auto registers', function(t) {
   t.plan(2);
 
