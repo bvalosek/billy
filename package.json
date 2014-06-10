@@ -16,7 +16,7 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
-    "tape": "^2.13.1"
+    "tape": "^2.13.2"
   },
   "repository": {
     "type": "git",
@@ -37,8 +37,8 @@
     ]
   },
   "dependencies": {
-    "debug": "^0.8.1",
-    "es6-promise": "^1.0.0",
+    "bluebird": "^2.0.7",
+    "debug": "^1.0.1",
     "sack": "^2.0.4",
     "typedef": "^1.0.4"
   }
