@@ -1,5 +1,10 @@
 # Change History
 
+## v1.4.1 (2014-06-10)
+
+* Updated dependencies
+* Using `bluebird` for promises now
+
 ## v1.4.0 (2014-05-31)
 
 * Added `stop()` method to shutdown services in reverse order
