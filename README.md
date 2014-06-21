@@ -35,18 +35,127 @@ app.start();
 * Service-oriented design
 * Compatible in all browsers and NodeJS
 
-## Philosophy
+## Overview
 
-The primary philosophy of Billy is to provide a cohesive and useful set of
-patterns for building an application that doesn't creep its way into your
-business logic and domain code.
+The primary goal and driving philosophy of Billy is to provide a cohesive and
+useful set of patterns for building an application that doesn't creep its way
+into your business logic and domain code.
 
 It is flexible and generic enough to work great for building server apps,
-browser apps, or even CLI apps.
+browser apps, javascript games, or even CLI utilities.
 
 Billy very much so strives to be the
 [express](https://github.com/visionmedia/express) of general application
 architecture.
+
+## Services
+
+Billy views your application as the composition of several dependency-injected
+Services. When the application is started via `app.start()`, all registered
+services will be instantiated in turn and be given a chance to startup.
+
+A service should be used to create various run-time objects and register them
+as dependencies with the IoC container via the `app` dependency for other parts
+of the application to use.
+
+Services are effectively the place where all the various pieces of your
+application are booted and wired together.
+
+### Registering a service
+
+The simplest example of a service is simply a function:
+
+```javascript
+app.register(function () {
+  console.log('service created');
+});
+```
+
+If our service took some time to startup, we could return a `Promise` to ensure
+during the service start phase, the application would wait.
+
+```javascript
+app.register(function () {
+  console.log('service created');
+
+  return someAsyncTask()
+    .then(function() {
+      console.log('service started');
+    });
+});
+```
+
+Note that all services are first *created* all at once (by calling the provided
+function), synchronously. Then, all of the services are *started* (by waiting
+on any promises returned in the service function).
+
+
+## Application Methods
+
+### app.container(container): object
+
+Swap out the underlying IoC container with a new instance `container`. It will
+have to conform to the same interface that
+[sack](https://github.com/bvalosek/sack) uses.
+
+It will return the old container.
+
+### app.make(tag:string): object
+
+Will resolve / create an object instance out of the container based on what was
+registered with `tag`.
+
+See [sack](https://github.com/bvalosek/sack) for more details.
+
+### app.make(T:constructor): object
+
+Create a new object instance via the object constructor `T` (e.g, `new T()`).
+
+Also resolve any constructor paramaters out of the container. See
+[sack](https://github.com/bvalosek/sack) for more info on how creating
+IoC-injected objects works.
+
+### app.register(tag:string, thing:object): IoCBinding
+
+Registers a new dependency `thing` with name `tag` and returns an `IoCBinding`.
+
+`thing` could be an object instance, an object constructor function, or a
+closure. See [sack](https://github.com/bvalosek/sack) for more details on
+registering objects with the container..
+
+### app.service(TService)
+
+Registers a new dependency-injected service `TService` to be started with the
+application. See *Services* above.
+
+### app.start(): Promise
+
+Starts the application by first by instantiating all the services
+synchronously, and then attempting to start the services asynchronously. See
+*Services* above.
+
+Returns a `Promise` that either resolves when all services have started, or
+fails with any error / rejected promise during service startup.
+
+### app.stop(): Promise
+
+Stop the application by trying to asynchronously stop all services in the
+reverse order they started. See *Services* above.
+
+Returns a `Promise` that either resolves when all services have stopped, or
+fails with any error / rejected promise during service tear down.
+
+## List of Billy Services
+
+Here is a list of some services you can use with Billy.
+
+You should also consult the [packages on npm with the billy-service
+tag](https://npmjs.org/browse/keyword/billy-service).
+
+* [http-express-service](https://github.com/bvalosek/billy-http-express) Use
+  Express 4 to setup an HTTP server.
+* [sql-postgres-service](https://github.com/bvalosek/billy-sql-postgres) Expose
+  a `sql` object that can be used to query a PostgreSQL database.
 
 ## Testing
 
