@@ -72,7 +72,7 @@ can use promises to signal an asynchronous startup.
 The simplest example of a service is simply a function:
 
 ```javascript
-app.register(function () {
+app.service(function () {
   console.log('service created');
 });
 ```
@@ -81,7 +81,7 @@ If our service took some time to startup, we could return a `Promise` to ensure
 during the service start phase, the application would wait.
 
 ```javascript
-app.register(function () {
+app.service(function () {
   console.log('service created');
 
   return someAsyncTask()
@@ -109,6 +109,19 @@ function MyService()
 }
 ```
 
+In our startup file:
+
+```javascript
+// main.js
+var Application = require('billy');
+var MyService = require('./MyService.js');
+
+var app = new Application();
+
+app.service(MyService);
+app.start();
+```
+
 If this service requires some additional setup after all services have been
 created, or requires an asynchronous startup, we can implement a `start`
 method:
@@ -122,6 +135,9 @@ MyService.prototype.start = function()
     });
 };
 ```
+
+Any promise return is waited on until it resolves before attempting to start
+any subsequent services.
 
 ## Application Methods
 
