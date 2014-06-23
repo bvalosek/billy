@@ -63,6 +63,12 @@ application are booted and wired together.
 
 ### Registering a service
 
+Your application entry point will register a series of services that will power
+your app. Services can either be a simple closure or a class constructor, and
+can use promises to signal an asynchronous startup.
+
+### Using closures as a Service
+
 The simplest example of a service is simply a function:
 
 ```javascript
@@ -89,25 +95,52 @@ Note that all services are first *created* all at once (by calling the provided
 function), synchronously. Then, all of the services are *started* (by waiting
 on any promises returned in the service function).
 
+#### Using Class Constructors as a Service
+
+A simple class constructor can be passed to the `app.service()` method as well.
+
+```javascript
+// MyService.js
+module.exports = MyService;
+
+function MyService()
+{
+  console.log('service created');
+}
+```
+
+If this service requires some additional setup after all services have been
+created, or requires an asynchronous startup, we can implement a `start`
+method:
+
+```javascript
+MyService.prototype.start = function()
+{
+  return someAsyncTask()
+    .then(function() {
+      console.log('service started');
+    });
+};
+```
 
 ## Application Methods
 
-### app.container(container): object
+### var oldContainer = app.container(newContainer)
 
-Swap out the underlying IoC container with a new instance `container`. It will
+Swap out the underlying IoC container with a new one `newContainer`. It will
 have to conform to the same interface that
 [sack](https://github.com/bvalosek/sack) uses.
 
 It will return the old container.
 
-### app.make(tag:string): object
+### var thing = app.make(tag)
 
 Will resolve / create an object instance out of the container based on what was
 registered with `tag`.
 
 See [sack](https://github.com/bvalosek/sack) for more details.
 
-### app.make(T:constructor): object
+### var thing = app.make(T)
 
 Create a new object instance via the object constructor `T` (e.g, `new T()`).
 
@@ -115,7 +148,7 @@ Also resolve any constructor paramaters out of the container. See
 [sack](https://github.com/bvalosek/sack) for more info on how creating
 IoC-injected objects works.
 
-### app.register(tag:string, thing:object): IoCBinding
+### var binding = app.register(tag, thing)
 
 Registers a new dependency `thing` with name `tag` and returns an `IoCBinding`.
 
@@ -128,7 +161,7 @@ registering objects with the container..
 Registers a new dependency-injected service `TService` to be started with the
 application. See *Services* above.
 
-### app.start(): Promise
+### var pStarted = app.start()
 
 Starts the application by first by instantiating all the services
 synchronously, and then attempting to start the services asynchronously. See
@@ -137,7 +170,7 @@ synchronously, and then attempting to start the services asynchronously. See
 Returns a `Promise` that either resolves when all services have started, or
 fails with any error / rejected promise during service startup.
 
-### app.stop(): Promise
+### var pStopped = app.stop()
 
 Stop the application by trying to asynchronously stop all services in the
 reverse order they started. See *Services* above.
