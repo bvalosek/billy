@@ -44,9 +44,9 @@ into your business logic and domain code.
 It is flexible and generic enough to work great for building server apps,
 browser apps, javascript games, or even CLI utilities.
 
-Billy very much so strives to be the
-[express](https://github.com/visionmedia/express) of general application
-architecture.
+Much like [express](https://github.com/visionmedia/express), Billy strives not
+to be a framework that permeates all parts of your codebase, but rather the
+scaffolding that allows you to roll your own application architecture stack.
 
 ## Services
 
@@ -59,20 +59,20 @@ as dependencies with the IoC container via the `app` dependency for other parts
 of the application to use.
 
 Services are effectively the place where all the various pieces of your
-application are booted and wired together.
+application are booted, configured, and wired together.
 
 ### Registering a service
 
 Your application entry point will register a series of services that will power
 your app. Services can either be a simple closure or a class constructor, and
-can use promises to signal an asynchronous startup.
+can optionally use promises to signal an asynchronous startup.
 
 ### Using closures as a Service
 
-The simplest example of a service is simply a function:
+The simplest example of a service is a function:
 
 ```javascript
-app.service(function () {
+app.service(function main() {
   console.log('service created');
 });
 ```
@@ -81,7 +81,7 @@ If our service took some time to startup, we could return a `Promise` to ensure
 during the service start phase, the application would wait.
 
 ```javascript
-app.service(function () {
+app.service(function main() {
   console.log('service created');
 
   return someAsyncTask()
@@ -139,38 +139,12 @@ MyService.prototype.start = function()
 Any promise return is waited on until it resolves before attempting to start
 any subsequent services.
 
+This is useful for things like downloading external data, verifying
+credentials, bootstrapping external connections, etc. The application startup
+process will block until the service resolves, guaranteeing a deterministic
+boot up.
+
 ## Application Methods
-
-### var oldContainer = app.container(newContainer)
-
-Swap out the underlying IoC container with a new one `newContainer`. It will
-have to conform to the same interface that
-[sack](https://github.com/bvalosek/sack) uses.
-
-It will return the old container.
-
-### var thing = app.make(tag)
-
-Will resolve / create an object instance out of the container based on what was
-registered with `tag`.
-
-See [sack](https://github.com/bvalosek/sack) for more details.
-
-### var thing = app.make(T)
-
-Create a new object instance via the object constructor `T` (e.g, `new T()`).
-
-Also resolve any constructor paramaters out of the container. See
-[sack](https://github.com/bvalosek/sack) for more info on how creating
-IoC-injected objects works.
-
-### var binding = app.register(tag, thing)
-
-Registers a new dependency `thing` with name `tag` and returns an `IoCBinding`.
-
-`thing` could be an object instance, an object constructor function, or a
-closure. See [sack](https://github.com/bvalosek/sack) for more details on
-registering objects with the container..
 
 ### app.service(TService)
 
@@ -194,17 +168,28 @@ reverse order they started. See *Services* above.
 Returns a `Promise` that either resolves when all services have stopped, or
 fails with any error / rejected promise during service tear down.
 
-## List of Billy Services
+### var thing = app.make(tag)
 
-Here is a list of some services you can use with Billy.
+Will resolve / create an object instance out of the container based on what was
+registered with the string `tag`.
 
-You should also consult the [packages on npm with the billy-service
-tag](https://npmjs.org/browse/keyword/billy-service).
+See [sack](https://github.com/bvalosek/sack) for more details.
 
-* [http-express-service](https://github.com/bvalosek/billy-http-express) Use
-  Express 4 to setup an HTTP server.
-* [sql-postgres-service](https://github.com/bvalosek/billy-sql-postgres) Expose
-  a `sql` object that can be used to query a PostgreSQL database.
+### var thing = app.make(T)
+
+Create a new object instance via the object constructor `T` (e.g, `new T()`).
+
+Also resolve any constructor parameters out of the container. See
+[sack](https://github.com/bvalosek/sack) for more info on how creating
+IoC-injected objects works.
+
+### var binding = app.register(tag, thing)
+
+Registers a new dependency `thing` with name `tag` and returns an `IoCBinding`.
+
+`thing` could be an object instance, an object constructor function, or a
+closure. See [sack](https://github.com/bvalosek/sack) for more details on
+registering objects with the container..
 
 ## Testing
 
