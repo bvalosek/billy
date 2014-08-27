@@ -28,7 +28,7 @@ app.start();
 
 ## Features
 
-* Dependency injection / inversion-of-control container
+* [Dependency injection / inversion-of-control container](https://github.com/bvalosek/sack)
 * Generic configuration store
 * Asynchronous promise-based service stack
 * Extremely minimal
