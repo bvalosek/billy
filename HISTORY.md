@@ -2,7 +2,7 @@
 
 ## v1.5.0 (???)
 
-* `container()` method depricated
+* `container()` method deprecated
 * Updated dependencies
 * Updated documentation
 
