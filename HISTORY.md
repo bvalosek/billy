@@ -1,6 +1,6 @@
 # Change History
 
-## v1.5.0 (???)
+## v1.5.0 (2014-08-30)
 
 * `container()` method deprecated
 * Updated dependencies
