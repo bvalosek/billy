@@ -191,6 +191,12 @@ Registers a new dependency `thing` with name `tag` and returns an `IoCBinding`.
 closure. See [sack](https://github.com/bvalosek/sack) for more details on
 registering objects with the container..
 
+## Billy Services
+
+Billy-compatible services can be found with the `billy-service` tag on npm:
+
+[Billy services on npm](https://www.npmjs.org/browse/keyword/billy-service)
+
 ## Testing
 
 ```
