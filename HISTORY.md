@@ -1,5 +1,9 @@
 # Change History
 
+## v1.5.1 (2014-09-15)
+
+* Expose `ConfigStore` class on the package
+
 ## v1.5.0 (2014-08-30)
 
 * `container()` method deprecated
