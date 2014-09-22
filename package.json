@@ -7,16 +7,16 @@
     "email": "bvalosek@gmail.com",
     "url": "http://bvalosek.com"
   },
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
-    "test": "tape test/*.js"
+    "test": "tape test/*.js",
+    "doc": "jsdoc -c ./.jsdoc.json"
   },
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
-    "tape": "^2.14.0"
+    "jsdoc": "^3.3.0-alpha9",
+    "jsdoc3-bootstrap": "^0.7.1",
+    "tape": "^3.0.0"
   },
   "repository": {
     "type": "git",
@@ -38,8 +38,8 @@
   },
   "dependencies": {
     "bluebird": "^2.3.2",
-    "debug": "^1.0.4",
-    "sack": "^2.1.1",
+    "debug": "^2.0.0",
+    "sack": "^2.1.2",
     "typedef": "^1.1.0"
   }
 }

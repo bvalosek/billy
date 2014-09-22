@@ -1,0 +1,15 @@
+{
+  "source":{
+    "include": [
+      "./lib",
+      "./README.md",
+      "./node_modules/sack/lib"
+    ]
+  },
+  "plugins": ["plugins/markdown"],
+  "opts": {
+    "template": "./node_modules/jsdoc3-bootstrap",
+    "recurse": true,
+    "destination": "./doc"
+  }
+}

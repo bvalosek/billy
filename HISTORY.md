@@ -1,5 +1,9 @@
 # Change History
 
+## v1.5.2 (2014-09-22)
+
+* JSDoc updates / documention generation script
+
 ## v1.5.1 (2014-09-15)
 
 * Expose `ConfigStore` class on the package
