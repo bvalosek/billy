@@ -144,53 +144,6 @@ credentials, bootstrapping external connections, etc. The application startup
 process will block until the service resolves, guaranteeing a deterministic
 boot up.
 
-## Application Methods
-
-### app.service(TService)
-
-Registers a new dependency-injected service `TService` to be started with the
-application. See *Services* above.
-
-### var pStarted = app.start()
-
-Starts the application by first by instantiating all the services
-synchronously, and then attempting to start the services asynchronously. See
-*Services* above.
-
-Returns a `Promise` that either resolves when all services have started, or
-fails with any error / rejected promise during service startup.
-
-### var pStopped = app.stop()
-
-Stop the application by trying to asynchronously stop all services in the
-reverse order they started. See *Services* above.
-
-Returns a `Promise` that either resolves when all services have stopped, or
-fails with any error / rejected promise during service tear down.
-
-### var thing = app.make(tag)
-
-Will resolve / create an object instance out of the container based on what was
-registered with the string `tag`.
-
-See [sack](https://github.com/bvalosek/sack) for more details.
-
-### var thing = app.make(T)
-
-Create a new object instance via the object constructor `T` (e.g, `new T()`).
-
-Also resolve any constructor parameters out of the container. See
-[sack](https://github.com/bvalosek/sack) for more info on how creating
-IoC-injected objects works.
-
-### var binding = app.register(tag, thing)
-
-Registers a new dependency `thing` with name `tag` and returns an `IoCBinding`.
-
-`thing` could be an object instance, an object constructor function, or a
-closure. See [sack](https://github.com/bvalosek/sack) for more details on
-registering objects with the container..
-
 ## Billy Services
 
 Billy-compatible services can be found with the `billy-service` tag on npm:
