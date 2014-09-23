@@ -2,6 +2,7 @@
   "source":{
     "include": [
       "./lib",
+      "./package.json",
       "./README.md",
       "./node_modules/sack/lib"
     ]
