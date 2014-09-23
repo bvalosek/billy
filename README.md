@@ -203,6 +203,14 @@ Billy-compatible services can be found with the `billy-service` tag on npm:
 $ npm test
 ```
 
+## Documentation
+
+This will generate the HTML documentation under `./doc`:
+
+```
+$ npm run doc
+```
+
 ## License
 
 MIT
