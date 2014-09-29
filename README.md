@@ -26,6 +26,11 @@ app.service(function main() {
 app.start();
 ```
 
+## Links
+
+* [Billy services on npm](https://www.npmjs.org/browse/keyword/billy-service)
+* [API documentation](http://docs.billy.technology)
+
 ## Features
 
 * [Dependency injection / inversion-of-control container](https://github.com/bvalosek/sack)
@@ -143,12 +148,6 @@ This is useful for things like downloading external data, verifying
 credentials, bootstrapping external connections, etc. The application startup
 process will block until the service resolves, guaranteeing a deterministic
 boot up.
-
-## Billy Services
-
-Billy-compatible services can be found with the `billy-service` tag on npm:
-
-[Billy services on npm](https://www.npmjs.org/browse/keyword/billy-service)
 
 ## Testing
 
