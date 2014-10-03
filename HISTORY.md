@@ -1,5 +1,9 @@
 # Change History
 
+## v1.6.0 (2014-10-01)
+
+* Deprecate `Application.config` -- will be removing all `ConfigStore` stuff in v2
+
 ## v1.5.2 (2014-09-22)
 
 * JSDoc updates / documention generation script
