@@ -1,8 +1,14 @@
 # Change History
 
+## v1.7.0 (2014-10-12)
+
+* Added `Application#registerDefaultInstance` method
+* Added `Application#registerInstance` convenience method
+* Added `Application#registerSingleton` convenience method
+
 ## v1.6.0 (2014-10-01)
 
-* Deprecate `Application.config` -- will be removing all `ConfigStore` stuff in v2
+* Deprecate `Application#config` -- will be removing all `ConfigStore` stuff in v2
 
 ## v1.5.2 (2014-09-22)
 
