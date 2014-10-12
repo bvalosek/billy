@@ -214,4 +214,22 @@ test('convenience functions', function(t) {
   t.strictEqual(app.make('instance'), T);
 });
 
+test('register default instance', function(t) {
+  t.plan(2);
+
+  var app = new Application();
+
+  var Config = function() { };
+  var config = new Config();
+
+  app.registerDefaultInstance('config', config);
+
+  t.strictEqual(app.make('config'), config);
+
+  var abc = {};
+  app.registerInstance('config', abc);
+  t.strictEqual(app.make('config'), abc);
+
+});
+
 
