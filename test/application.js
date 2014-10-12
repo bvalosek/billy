@@ -196,4 +196,22 @@ test('Stopping', function(t) {
 
 });
 
+test('convenience functions', function(t) {
+  t.plan(3);
+
+  var app = new Application();
+
+  var T = function() { };
+
+  app.registerSingleton('singleton', T);
+
+  t.strictEqual(app.make('singleton'), app.make('singleton'));
+
+  t.ok(app.make('singleton') instanceof T);
+
+  app.registerInstance('instance', T);
+
+  t.strictEqual(app.make('instance'), T);
+});
+
 
