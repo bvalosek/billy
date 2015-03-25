@@ -16,8 +16,9 @@ $ npm install billy
 ## Usage
 
 ```javascript
-var Application = require('billy');
-var app = new Application();
+import Application from 'billy';
+
+let app = new Application();
 
 app.service(function main() {
   console.log('Hello, World!');
@@ -76,7 +77,7 @@ can optionally use promises to signal an asynchronous startup.
 The simplest example of a service is a function:
 
 ```javascript
-app.service(function main() {
+app.service(() => {
   console.log('service created');
 });
 ```
@@ -85,13 +86,10 @@ If our service took some time to startup, we could return a `Promise` to ensure
 during the service start phase, the application would wait.
 
 ```javascript
-app.service(function main() {
+app.service(async () => {
   console.log('service created');
-
-  return someAsyncTask()
-    .then(function() {
-      console.log('service started');
-    });
+  await someAsyncTask();
+  console.log('service started');
 });
 ```
 
@@ -105,11 +103,13 @@ A simple class constructor can be passed to the `app.service()` method as well.
 
 ```javascript
 // MyService.js
-module.exports = MyService;
 
-function MyService()
+export default class MyService
 {
-  console.log('service created');
+  constructor()
+  {
+    console.log('service created');
+  }
 }
 ```
 
@@ -117,10 +117,10 @@ In our startup file:
 
 ```javascript
 // main.js
-var Application = require('billy');
-var MyService = require('./MyService.js');
+import Application from 'billy';
+import MyService from './MyService.js';
 
-var app = new Application();
+let app = new Application();
 
 app.service(MyService);
 app.start();
@@ -131,13 +131,14 @@ created, or requires an asynchronous startup, we can implement a `start`
 method:
 
 ```javascript
-MyService.prototype.start = function()
+export default class MyService
 {
-  return someAsyncTask()
-    .then(function() {
-      console.log('service started');
-    });
-};
+  async start()
+  {
+    await someAsyncTask();
+    console.log('service started');
+  }
+}
 ```
 
 Any promise return is waited on until it resolves before attempting to start
