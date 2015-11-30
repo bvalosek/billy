@@ -39,7 +39,7 @@
   "dependencies": {
     "bluebird": "^3.0.5",
     "debug": "^2.0.0",
-    "sack": "^2.2.2",
+    "sack": "^2.2.3",
     "typedef": "^1.1.0"
   }
 }
