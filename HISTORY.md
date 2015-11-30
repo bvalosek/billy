@@ -1,5 +1,9 @@
 # Change History
 
+## v1.7.1 (2015-11-29)
+
+* Updated dependencies (fixes issues with ES2015 runtimes)
+
 ## v1.7.0 (2014-10-12)
 
 * Added `Application#registerDefaultInstance` method
