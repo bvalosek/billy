@@ -5,8 +5,6 @@
 
 A minimal application harness that stays out of your way and out of your code.
 
-[![browser support](https://ci.testling.com/bvalosek/billy.png)](https://ci.testling.com/bvalosek/billy)
-
 ## Installation
 
 ```
