@@ -1,5 +1,9 @@
 # Change History
 
+## v1.7.3 (2015-11-30)
+
+* Updated sack version to fix issue with nested functions
+
 ## v1.7.2 (2015-11-29)
 
 * Updated sack version to fix ES2015 class issue
