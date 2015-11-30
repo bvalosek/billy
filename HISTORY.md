@@ -1,5 +1,9 @@
 # Change History
 
+## v1.7.2 (2015-11-29)
+
+* Updated sack version to fix ES2015 class issue
+
 ## v1.7.1 (2015-11-29)
 
 * Updated dependencies (fixes issues with ES2015 runtimes)
