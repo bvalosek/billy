@@ -42,6 +42,12 @@ application are booted, configured, and wired together. The should stay very
 lean and not contain any business logic-- keep that in your billy-unaware layer
 of the application.
 
+## Contributors
+
+* [Brandon Valosek](https://github.com/bvalosek)
+* [Zak Angelle](https://github.com/zakangelle)
+* [Dillon Shook](https://github.com/dshook)
+
 ## Testing
 
 ```
@@ -50,5 +56,5 @@ $ npm test
 
 ## License
 
-MIT
+[MIT](https://github.com/bvalosek/billy/blob/master/LICENSE)
 
