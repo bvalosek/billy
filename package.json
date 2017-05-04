@@ -1,45 +1,17 @@
 {
   "name": "billy",
-  "version": "1.7.3",
+  "version": "2.0.0",
   "description": "A minimal application harness that stays out of your way and out of your code.",
-  "author": {
-    "name": "Brandon Valosek",
-    "email": "bvalosek@gmail.com",
-    "url": "http://bvalosek.com"
-  },
-  "scripts": {
-    "test": "tape test/*.js",
-    "doc": "jsdoc -c ./.jsdoc.json"
-  },
-  "main": "index.js",
+  "author": "Brandon Valosek <bvalosek@gmail.com>",
+  "repository": "git@github.com:bvalosek/billy.git",
   "license": "MIT",
-  "devDependencies": {
-    "jsdoc": "^3.3.0-alpha9",
-    "jsdoc3-bootstrap": "^0.7.1",
-    "tape": "^3.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:bvalosek/billy.git"
-  },
-  "testling": {
-    "files": "test/*.js",
-    "browsers": [
-      "ie/6..latest",
-      "chrome/28..canary",
-      "firefox/23..nightly",
-      "safari/5.1..latest",
-      "opera/latest",
-      "opera/next",
-      "iphone/latest",
-      "ipad/latest",
-      "android-browser/latest"
-    ]
+  "scripts": {
+    "test": "tape test/*.js"
   },
   "dependencies": {
-    "bluebird": "^3.0.5",
-    "debug": "^2.0.0",
-    "sack": "^2.2.3",
-    "typedef": "^1.1.0"
+    "debug": "2.6.6"
+  },
+  "devDependencies": {
+    "tape": "4.6.3"
   }
 }
