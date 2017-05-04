@@ -3,7 +3,7 @@
 A minimal application harness that stays out of your way and out of your code.
 
 > This is the v2 branch, which has back-compat breaking changes from v1, see
-> [billy v1](https://github.com/bvalosek/billy/tree/v1) for the old version
+> [billy v1](https://github.com/bvalosek/billy/tree/v1.7.3) for the old version
 
 ## Installation
 

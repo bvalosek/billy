@@ -6,4 +6,4 @@
 
 ## v1 Change History
 
-* https://github.com/bvalosek/billy/blob/v1/HISTORY.md
+* https://github.com/bvalosek/billy/blob/v1.7.3/HISTORY.md
