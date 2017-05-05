@@ -1,7 +1,7 @@
 const Application = require('../lib');
 const test = require('tape');
 
-test('service instantiation order', async t => {
+test('Application: service instantiation order', async t => {
   const app = new Application();
 
   const list = [ ];
@@ -19,7 +19,7 @@ test('service instantiation order', async t => {
   t.end();
 });
 
-test('service startup order', async t => {
+test('Application: service startup order', async t => {
   const app = new Application();
 
   const list = [ ];
@@ -37,7 +37,7 @@ test('service startup order', async t => {
   t.end();
 });
 
-test('service method asserts', async t => {
+test('Application: service method asserts', async t => {
   const app = new Application();
 
   t.throws(() => app.service(), 'missing param throws');
