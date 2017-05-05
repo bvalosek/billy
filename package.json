@@ -9,6 +9,7 @@
     "test": "tape test/*.js"
   },
   "dependencies": {
+    "babylon": "6.17.0",
     "debug": "2.6.6"
   },
   "devDependencies": {

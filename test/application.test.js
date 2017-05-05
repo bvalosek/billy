@@ -44,13 +44,14 @@ test('service method asserts', async t => {
   t.throws(() => app.service('fart'), 'bad param type throws');
 
   class T { }
-
   app.service(T);
-
   t.throws(() => app.service(T), 'registering same service twice throws');
 
-  await app.start();
+  app.service(class X { });
+  app.service(class X { });
+  t.pass('register unique classes with same name does not throw');
 
+  await app.start();
   t.throws(() => app.service(class U { }), 'adding service after start throws');
 
   t.end();
