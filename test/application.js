@@ -36,3 +36,24 @@ test('service startup order', async t => {
 
   t.end();
 });
+
+test('service method asserts', async t => {
+  const app = new Application();
+
+  t.throws(() => app.service(), 'missing param throws');
+  t.throws(() => app.service('fart'), 'bad param type throws');
+
+  class T { }
+
+  app.service(T);
+
+  t.throws(() => app.service(T), 'registering same service twice throws');
+
+  await app.start();
+
+  t.throws(() => app.service(class U { }), 'adding service after start throws');
+
+  t.end();
+});
+
+
