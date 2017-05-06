@@ -1,5 +1,7 @@
 # billy
 
+> v2 is currently in progress and is NOT yet shipped / final
+
 [![CircleCI](https://circleci.com/gh/bvalosek/billy/tree/master.svg?style=svg)](https://circleci.com/gh/bvalosek/billy/tree/master)
 
 A minimal application harness that stays out of your way and out of your code.
