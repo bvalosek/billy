@@ -1,7 +1,7 @@
 const Application = require('../lib');
 const Container = require('../lib/Container.js');
 const test = require('tape');
-const ITERATIONS = 1000;
+const ITERATIONS = 10000;
 
 test('Perf: Raw new', async t => {
   const A = Symbol('a');
@@ -23,11 +23,9 @@ test('Perf: Raw new', async t => {
 test('Perf: Container new', async t => {
   const c = new Container();
 
-  const A = Symbol('a');
-  const B = Symbol('b');
+  c.registerValue('a', Symbol('a'));
+  c.registerValue('b', Symbol('b'));
 
-  c.registerValue('a', A);
-  c.registerValue('b', B);
   class T { constructor(a, b){} }
 
   let timer = ElapsedTime.startNew();
@@ -41,6 +39,41 @@ test('Perf: Container new', async t => {
   t.end();
 });
 
+test('Perf: Raw fn call', async t => {
+  const A = Symbol('a');
+  const B = Symbol('b');
+
+  const factory = function (b, a) { return [ a, b ]; };
+
+  let timer = ElapsedTime.startNew();
+
+  for(let i = 0; i < ITERATIONS; i++){
+    let foo = factory(A, B);
+  }
+
+  timer.end('Raw fn call')
+
+  t.end();
+});
+
+test('Perf: Container fn call', async t => {
+  const c = new Container();
+
+  c.registerValue('a', Symbol('a'));
+  c.registerValue('b', Symbol('b'));
+
+  const factory = function (b, a) { return [ a, b ]; };
+
+  let timer = ElapsedTime.startNew();
+
+  for(let i = 0; i < ITERATIONS; i++){
+    let foo = c.call(factory);
+  }
+
+  timer.end('Container fn call')
+
+  t.end();
+});
 
 class ElapsedTime {
   constructor(customDebug) {
