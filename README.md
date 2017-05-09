@@ -44,7 +44,7 @@ of the application.
 
 > Code Examples
 
-### Environmentso
+### Environments
 
 `billy` is written to run in modern Javascript environments (ES2017) that
 support the CommonJS module system (e.g, Node 7).
