@@ -90,3 +90,39 @@ test('Container: singleton', t => {
 
   t.end();
 });
+
+test('Container: singleton and locals', t => {
+
+  const c = new Container();
+
+  class Foo { constructor(a) { this.a = a; } };
+
+  const A = Symbol('a');
+  const A1 = Symbol('a1');
+
+  c.registerClass('foo1', Foo);
+  c.registerSingleton('foo2', Foo);
+  c.registerValue('a', A);
+
+  {
+    const foo = c.resolve('foo1');
+    t.strictEqual(foo.a, A, 'normal registered dep injected');
+  }
+
+  {
+    const foo = c.resolve('foo1', { a: A1 });
+    t.strictEqual(foo.a, A1, 'locals passed to non singleton class');
+  }
+
+  {
+    const foo = c.resolve('foo2');
+    t.strictEqual(foo.a, A, 'normal registered dep injected');
+  }
+
+  {
+    const foo = c.resolve('foo2', { a: A1 });
+    t.strictEqual(foo.a, A, 'locals NOT passed to non singleton class');
+  }
+
+  t.end();
+});
