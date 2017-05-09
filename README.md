@@ -16,8 +16,6 @@ A minimal application harness that stays out of your way and out of your code.
 $ npm install billy
 ```
 
-## Usage
-
 ## Overview
 
 The primary goal and driving philosophy of Billy is to provide a cohesive and
@@ -31,20 +29,29 @@ Much like [express](https://github.com/visionmedia/express), Billy strives not
 to be a framework that permeates all parts of your codebase, but rather the
 scaffolding that allows you to roll your own application architecture stack.
 
-## Services
-
-Billy views your application as the composition of several dependency-injected
-Services. When the application is started via `app.start()`, all added
-services will be instantiated in turn and be given a chance to startup.
-
-A service should be used to create various run-time objects and register them
-as dependencies with the IoC container via the `app` dependency for other parts
-of the application to use.
+### The `Application` instance and the Service Stack
 
 Services are effectively the place where all the various pieces of your
 application are booted, configured, and wired together. The should stay very
-lean and not contain any business logic-- keep that in your billy-unaware layer
+lean and not contain any business logic; keep that in your billy-unaware layers
 of the application.
+
+### The `Container` instance and Dependency Injection
+
+> Philosophy behind the IoC container
+
+## Usage
+
+> Code Examples
+
+### Environmentso
+
+`billy` is written to run in modern Javascript environments (ES2017) that
+support the CommonJS module system (e.g, Node 7).
+
+#### Older JS Runtimes
+
+> Examples of requiring the transpiled versions of the lib
 
 ## API
 
