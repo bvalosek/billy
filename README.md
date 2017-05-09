@@ -46,6 +46,28 @@ application are booted, configured, and wired together. The should stay very
 lean and not contain any business logic-- keep that in your billy-unaware layer
 of the application.
 
+## API
+
+### `Application(config)`
+
+#### `Application#service(T)`
+
+#### `Application#start()`
+
+#### `Application#stop()`
+
+#### `Application#container`
+
+### `Container`
+
+#### `Container#registerValue(tag, thing)`
+
+#### `Container#registerFactory(tag, factory)`
+
+#### `Container#registerClass(tag, T)`
+
+#### `Container#registerSingleton(tag, T)`
+
 ## Contributors
 
 * [Brandon Valosek](https://github.com/bvalosek)
