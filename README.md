@@ -83,7 +83,7 @@ app.service(PostgresDatabaseService);
 
 #### `Application#start()`
 
-Instantiate and state all services in the order they were registered.
+Instantiate and start all services in the order they were registered.
 
 ```javascript
 await app.start();
@@ -104,7 +104,8 @@ Reference to the dependency injection container for the application.
 ### `Container`
 
 The dependency injection container. There is no need to instantiate this
-directly as a reference to the application's container is exposed:
+directly as a reference to the application's container is exposed as a property
+on the `Application` instance:
 
 ```javascript
 const container = app.container;
@@ -121,8 +122,8 @@ app.container.registerValue('config', require('./config.json'));
 
 #### `Container#registerFactory(tag, factory)`
 
-Store a factory function in the container. Every time `tag` dependency is
-resolved, the factory function will be called, with its parameters injected.
+Store a factory function in the container. Every time the `tag` dependency is
+resolved, the factory function will be called with its parameters injected.
 
 ```javascript
 app.container.registerFactory('currentTime', () => new Date());
@@ -130,7 +131,7 @@ app.container.registerFactory('currentTime', () => new Date());
 
 #### `Container#registerClass(tag, T)`
 
-Store a class in the container. Every time `tag` dependency is resolved, a
+Store a class in the container. Every time the `tag` dependency is resolved, a
 fresh instance of the class is instantiated, with its constructor parameters
 injected.
 
