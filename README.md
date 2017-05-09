@@ -1,6 +1,7 @@
 # billy
 
-> v2 is currently in progress and is NOT yet shipped / final
+> v2 is currently in progress and is NOT yet shipped / final. To install it,
+> you need to run `npm install billy@v2-beta`
 
 [![CircleCI](https://circleci.com/gh/bvalosek/billy/tree/master.svg?style=svg)](https://circleci.com/gh/bvalosek/billy/tree/master)
 
