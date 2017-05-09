@@ -85,6 +85,8 @@ support the CommonJS module system (e.g, Node 7).
 
 #### `Container#registerSingleton(tag, T)`
 
+#### `Container#resolve(tag)`
+
 ## Contributors
 
 * [Brandon Valosek](https://github.com/bvalosek)
