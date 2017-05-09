@@ -66,3 +66,27 @@ test('Container: basic value deps', t => {
 test('Container: basic class deps', t => {
   t.end();
 });
+
+test('Container: singleton', t => {
+
+  const c = new Container();
+
+  let count = 0;
+
+  class Foo { constructor() { count++; } };
+
+  c.registerSingleton('foo', Foo);
+
+  t.strictEqual(count, 0, 'singletons are lazily built');
+
+  const foo = c.resolve('foo');
+  t.strictEqual(foo instanceof Foo, true, 'singletons resolve to instance of the class');
+  t.strictEqual(count, 1, 'constructor called once');
+
+  c.resolve('foo');
+  c.resolve('foo');
+  c.resolve('foo');
+  t.strictEqual(count, 1, 'constructor called once STILL');
+
+  t.end();
+});
