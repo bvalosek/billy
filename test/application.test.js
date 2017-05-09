@@ -37,6 +37,52 @@ test('Application: service startup order', async t => {
   t.end();
 });
 
+test('Application: service stop order', async t => {
+  const app = new Application();
+
+  const list = [ ];
+
+  app.service(class A { async stop() { list.push('a'); } });
+  app.service(class B { async stop() { list.push('b'); } });
+  app.service(class C { async stop() { list.push('c'); } });
+
+  t.deepEqual(list, [ ], 'services not stopped before app start');
+
+  await app.start();
+
+  t.deepEqual(list, [ ], 'services not stopped after app start');
+
+  await app.stop();
+
+  t.deepEqual(list, [ 'c', 'b', 'a' ], 'services stopped in correct order (and async)');
+
+  t.end();
+});
+
+test('Application: stopping service can throw', async t => {
+  const app = new Application();
+
+  const list = [ ];
+
+  const ERR = Symbol('oopsies');
+
+  app.service(class A { async stop() { list.push('a'); } });
+  app.service(class B { async stop() { throw ERR; } });
+  app.service(class C { async stop() { list.push('c'); } });
+
+  await app.start();
+
+  try {
+    await app.stop();
+  }
+  catch (err) {
+    t.deepEqual(list, [ 'c', 'a' ], 'services continued to stop after throw');
+    t.strictEqual(err, ERR, 'error from stop was rethrown');
+    t.end();
+  }
+
+});
+
 test('Application: service method asserts', async t => {
   const app = new Application();
 
