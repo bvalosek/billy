@@ -31,10 +31,18 @@ scaffolding that allows you to roll your own application architecture stack.
 
 ### The `Application` instance and the Service Stack
 
-Services are effectively the place where all the various pieces of your
-application are booted, configured, and wired together. The should stay very
-lean and not contain any business logic; keep that in your billy-unaware layers
-of the application.
+The root of your application is a single instance of the `Application` class:
+
+```javascript
+const Application = require('billy');
+
+const app = new Application();
+```
+
+An application is composed of several **services**. A service is a class that
+sets up and starts the various dependencies in your application. Services
+should be free of all business logic, and should be the only parts of the
+aplication that are aware of `billy`.
 
 ### The `Container` instance and Dependency Injection
 
