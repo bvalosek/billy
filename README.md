@@ -65,27 +65,98 @@ support the CommonJS module system (e.g, Node 7).
 
 ## API
 
-### `Application(config)`
+### `Application()`
+
+Root application class.
+
+```javascript
+const app = new Application();
+```
 
 #### `Application#service(T)`
 
+Register a service class with the application.
+
+```javascript
+app.service(PostgresDatabaseService);
+```
+
 #### `Application#start()`
+
+Instantiate and state all services in the order they were registered.
+
+```javascript
+await app.start();
+```
 
 #### `Application#stop()`
 
+Give each service a chance to shut down in reverse order they were started.
+
+```javascript
+await app.stop();
+```
+
 #### `Application#container`
+
+Reference to the dependency injection container for the application.
 
 ### `Container`
 
+The dependency injection container. There is no need to instantiate this
+directly as a reference to the application's container is exposed:
+
+```javascript
+const container = app.container;
+```
+
 #### `Container#registerValue(tag, thing)`
+
+Store a simple value in the container. Every time the `tag` dependency is
+resolved, the same value is returned.
+
+```javascript
+app.container.registerValue('config', require('./config.json'));
+```
 
 #### `Container#registerFactory(tag, factory)`
 
+Store a factory function in the container. Every time `tag` dependency is
+resolved, the factory function will be called, with its parameters injected.
+
+```javascript
+app.container.registerFactory('currentTime', () => new Date());
+```
+
 #### `Container#registerClass(tag, T)`
+
+Store a class in the container. Every time `tag` dependency is resolved, a
+fresh instance of the class is instantiated, with its constructor parameters
+injected.
+
+```javascript
+app.container.registerClass('logger', ElasticSearchLogger);
+```
 
 #### `Container#registerSingleton(tag, T)`
 
+Store a **singleton** class in the container. The first time `tag` dependency
+is resolved, the class will be instantiated and cached. Each subsequent
+resolution of `tag` will return the original instance after that.
+
+```javascript
+app.container.registerSingleton('db', PostgresDatabaseDriver);
+```
+
 #### `Container#resolve(tag)`
+
+Resolve a dependency from the container via its string tag. Typically this
+method shouldn't be used directly, but rather rely on automatic injection to
+get a hold of registered dependencies.
+
+```javascript
+const db = app.container.resolve('db');
+```
 
 ## Contributors
 
