@@ -1,6 +1,6 @@
 {
   "name": "billy",
-  "version": "2.0.0-beta",
+  "version": "2.0.0-beta-1",
   "description": "A minimal application harness that stays out of your way and out of your code.",
   "author": "Brandon Valosek <bvalosek@gmail.com>",
   "repository": "git@github.com:bvalosek/billy.git",
