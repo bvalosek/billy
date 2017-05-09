@@ -44,7 +44,7 @@ const app = new Application();
 An application is composed of several **services**. A service is a class that
 sets up and starts the various dependencies in your application. Services
 should be free of all business logic, and should be the only parts of the
-aplication that are aware of `billy`.
+aplication that are aware of Billy.
 
 ### The `Container` instance and Dependency Injection
 
@@ -56,8 +56,8 @@ aplication that are aware of `billy`.
 
 ### Environments
 
-`billy` is written to run in modern Javascript environments (ES2017) that
-support the CommonJS module system (e.g, Node 7).
+Billy is written to run in modern Javascript environments (ES2017) that support
+the CommonJS module system (e.g, Node 7).
 
 #### Older JS Runtimes
 
