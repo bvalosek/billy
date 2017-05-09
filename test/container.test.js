@@ -126,3 +126,15 @@ test('Container: singleton and locals', t => {
 
   t.end();
 });
+
+test('Container: utility return object', t => {
+  const c = new Container();
+
+  class Foo { }
+
+  const instance = c.registerSingleton('foo', Foo).resolve();
+
+  t.strictEqual(instance instanceof Foo, true, 'register and resolve in one line');
+
+  t.end();
+});
