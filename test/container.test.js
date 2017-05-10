@@ -138,3 +138,45 @@ test('Container: utility return object', t => {
 
   t.end();
 });
+
+test('Container: injecting an async function', async t => {
+  const c = new Container();
+
+  const A = c.registerValue('a', Symbol('a')).resolve();
+  const B = c.registerValue('b', Symbol('b')).resolve();
+  const C = Symbol('c');
+  const R = Symbol('r');
+
+  {
+    const f = async (a, b) => {
+      t.strictEqual(a, A, 'param a injected');
+      t.strictEqual(b, B, 'param b injected');
+      return R;
+    };
+
+    t.strictEqual(await c.call(f), R, 'func called and return value worked');
+  }
+
+  {
+    const f = async function (a, b) {
+      t.strictEqual(a, A, 'param a injected (non arrow)');
+      t.strictEqual(b, B, 'param b injected (non arrow)');
+      return R;
+    };
+
+    t.strictEqual(await c.call(f), R, 'func called and return value worked (non arrow)');
+  }
+
+  {
+    const f = async function (a, b, c) {
+      t.strictEqual(a, A, 'param a injected (non arrow)');
+      t.strictEqual(b, B, 'param b injected (non arrow)');
+      t.strictEqual(c, C, 'param c (local) injected (non arrow)');
+      return R;
+    };
+
+    t.strictEqual(await c.call(f, { c: C }), R, 'func called and return value worked (non arrow with locals)');
+  }
+
+  t.end();
+});
