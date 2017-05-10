@@ -63,6 +63,8 @@ the CommonJS module system (e.g, Node 7).
 
 > Examples of requiring the transpiled versions of the lib
 
+> Caveat about regenerator output with async functions
+
 ## API
 
 ### `Application()`
