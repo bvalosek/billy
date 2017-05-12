@@ -1,6 +1,6 @@
 # Change History
 
-## v2.0.0 (2017-05-11)
+## v2.0.1 (2017-05-11)
 
 * Initial v2 release
 
