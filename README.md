@@ -57,16 +57,16 @@ when you call `app.start()` to boot the application.
 
   await app.start();
 
-  console.log('app booted up');
+  console.log('all services succesfully instantiated and started -- nice!');
 
-});
+})();
 ```
 
 All services registered (via `Application#service`) will be instantiated (with
 injected constructors, see below) **in the order in which they were
-registered**. After all service have been successfully (and synchronously)
+registered**. After all services have been successfully (and synchronously)
 instantiated, the `start` method will be called on each one (again, in the
-registered order) if implemented. If `start` returns a `Promise`, the app will
+order registered) if implemented. If `start` returns a `Promise`, the app will
 wait for it to resolve before continuing.
 
 If any service `throw`s during instantiation or during the `start` method (or
