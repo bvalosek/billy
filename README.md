@@ -1,9 +1,5 @@
 # billy
 
-> v2 is currently in progress and is NOT yet shipped / final.
-
-> To install it, you need to run `npm install billy@v2-beta`
-
 [![CircleCI](https://circleci.com/gh/bvalosek/billy/tree/master.svg?style=svg)](https://circleci.com/gh/bvalosek/billy/tree/master)
 
 A minimal application harness that stays out of your way and out of your code.
@@ -21,15 +17,12 @@ $ npm install billy
 ## Overview
 
 The primary goal and driving philosophy of Billy is to provide a cohesive and
-useful set of patterns for building an application that doesn't creep its way
-into your business logic and domain code.
+useful set of utilities for building an complex application, without creeping
+its way into your business logic and domain code.
 
-It is flexible and generic enough to work great for building server apps,
-browser apps, Javascript games, or even CLI utilities.
-
-Much like [express](https://github.com/visionmedia/express), Billy strives not
-to be a framework that permeates all parts of your codebase, but rather the
-scaffolding that allows you to roll your own application architecture stack.
+Billy is not an opinionated framework that permeates all parts of your
+codebase, but rather the simple scaffolding that allows you to roll your own
+application architecture stack, your way.
 
 ### The `Application` instance and the Service Stack
 
@@ -44,24 +37,62 @@ const app = new Application();
 An application is composed of several **services**. A service is a class that
 sets up and starts the various dependencies in your application. Services
 should be free of all business logic, and should be the only parts of the
-aplication that are aware of Billy.
+application that are aware of Billy.
+
+```javascript
+app.service(AppConfigService);
+
+app.service(PostgresDatabaseService);
+
+app.service(SQSQueueService);
+
+app.service(AuthAPIComponent);
+```
+
+If a service implements a `start()` method, it will be called (and `await`-ed)
+when you call `app.start()` to boot the application.
+
+```javascript
+(async () => {
+
+  await app.start();
+
+  console.log('app booted up');
+
+});
+```
+
+All services registered (via `Application#service`) will be instantiated (with
+injected constructors, see below) **in the order in which they were
+registered**. After all service have been successfully (and synchronously)
+instantiated, the `start` method will be called on each one (again, in the
+registered order) if implemented. If `start` returns a `Promise`, the app will
+wait for it to resolve before continuing.
+
+If any service `throw`s during instantiation or during the `start` method (or
+the `Promise` returned is rejected), then the application will abort its
+startup.
 
 ### The `Container` instance and Dependency Injection
 
 > Philosophy behind the IoC container
 
-## Usage
+#### Registering Dependencies
 
-> Code Examples
+> The various `container.register*` methods
 
-### Environments
+#### Resolving Dependencies
+
+> Overview of `new` and `call` on the container, and locals
+
+## Environments
 
 Billy is written to run in modern Javascript environments (ES2017) that support
 the CommonJS module system and the latest ES2017 Spec (e.g, Node 7.10+). It
 uses `async` / `await` from the ES2017 spec, as well as features introduced in
 ES2015 (ES6) such as `Promise`, iterables, and `WeakMap`.
 
-#### Older JS Runtimes
+### Older JS Runtimes
 
 If you are not on the absolute cutting edge, you'll want to use a transpiled
 version of the library.
