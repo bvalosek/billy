@@ -57,13 +57,34 @@ aplication that are aware of Billy.
 ### Environments
 
 Billy is written to run in modern Javascript environments (ES2017) that support
-the CommonJS module system (e.g, Node 7).
+the CommonJS module system and the latest ES2017 Spec (e.g, Node 7.10+). It
+uses `async` / `await` from the ES2017 spec, as well as features introduced in
+ES2015 (ES6) such as `Promise`, iterables, and `WeakMap`.
 
 #### Older JS Runtimes
 
-> Examples of requiring the transpiled versions of the lib
+If you are not on the absolute cutting edge, you'll want to use a transpiled
+version of the library.
 
-> Caveat about regenerator output with async functions
+```javascript
+
+// Transpiled down to ES5 (pre-ES2015 / pre-ES6)
+const Application = require('billy/es5');
+
+// Targeting Node v6+
+const Application = require('billy/node6');
+```
+
+Some notes:
+
+* Even when compiling down to ES5, keep in the mind the code still retains the
+  CommonJS module syntax (i.e `require` calls)
+* There are no polyfills for the new global classes like `Promise`, `Map`,
+  `WeakMap`. If these are not available in your environment, you will need to
+  include them first before Billy
+* The `es5` target is dependent on a globally-available regenerator polyfill.
+* For more information on polyfills and regenerator, see [the official Babel
+  docs](http://babeljs.io/docs/usage/polyfill/)
 
 ## API
 
