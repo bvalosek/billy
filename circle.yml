@@ -4,4 +4,5 @@ machine:
 
 test:
   pre:
-    - npm run prepackage
+    # make sure the babel builds work
+    - npm run prepublish
