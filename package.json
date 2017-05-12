@@ -1,6 +1,6 @@
 {
   "name": "billy",
-  "version": "2.0.0-beta-1",
+  "version": "2.0.0-beta-2",
   "description": "A minimal application harness that stays out of your way and out of your code.",
   "author": "Brandon Valosek <bvalosek@gmail.com>",
   "repository": "git@github.com:bvalosek/billy.git",
@@ -14,10 +14,23 @@
   "babel": {
     "env": {
       "es5": {
-        "presets": [ "env" ]
+        "presets": [
+          "env"
+        ]
       },
       "node6": {
-        "presets": [ [ "env", { "targets": { "node": [ 6 ] } } ] ]
+        "presets": [
+          [
+            "env",
+            {
+              "targets": {
+                "node": [
+                  6
+                ]
+              }
+            }
+          ]
+        ]
       }
     }
   },
