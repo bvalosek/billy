@@ -42,9 +42,11 @@ test('Container: basic value deps', t => {
 
   const A = Symbol('a');
   const B = Symbol('b');
+  const C = null;
 
   c.registerValue('a', A);
   c.registerValue('b', B);
+  c.registerValue('c', C);
 
   {
     class T { }
@@ -53,11 +55,12 @@ test('Container: basic value deps', t => {
   }
 
   {
-    let d1, d2;
-    class T { constructor(b, a) { d1 = a; d2 = b; } }
+    let d1, d2, d3;
+    class T { constructor(b, a, c) { d1 = a; d2 = b; d3 = c; } }
     c.new(T);
     t.strictEqual(d1, A, 'registerd value was injected');
     t.strictEqual(d2, B, 'registerd value was injected');
+    t.strictEqual(d3, C, 'registerd value was injected');
   }
 
   t.end();
