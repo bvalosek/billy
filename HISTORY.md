@@ -1,5 +1,9 @@
 # Change History
 
+## v2.0.2 (2017-09-08)
+
+* [FIX] `container.registerValue` now works as expected with falsey values.
+
 ## v2.0.1 (2017-05-11)
 
 * Initial v2 release
