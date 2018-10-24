@@ -35,3 +35,8 @@ test('getArguments: arguments for a class, ctor not first', t => {
   t.deepEqual(ga(class T { set foo(v) {  } constructor(a, b, c) { } }), [ 'a', 'b', 'c' ], 'found args for class after setter');
   t.end();
 });
+
+test('getArguments: works with object rest spread', t => {
+  t.deepEqual(ga(class T { constructor(a, b, c) { var g = {x:1}; var h = {z: 2, ...g} } }), [ 'a', 'b', 'c' ], 'found args for class');
+  t.end();
+});
